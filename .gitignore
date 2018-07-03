@@ -15,5 +15,5 @@
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
-app
 .DS_Store
+vendor
