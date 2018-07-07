@@ -7,11 +7,10 @@ import (
 )
 
 func AddRoutes(r *gin.Engine)  {
-	tpls := packr.NewBox("./templates")
 	assets := packr.NewBox("./static")
 
 	r.StaticFS("/static", assets)
-	r.StaticFS("/templates", tpls)
+	// tpls := packr.NewBox("./templates")
 
 	// r.StaticFS("/more_static", http.Dir("my_file_system"))
 
