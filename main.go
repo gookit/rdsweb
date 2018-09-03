@@ -1,21 +1,38 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
+	"github.com/gobuffalo/packr"
+	"github.com/gookit/redis-viewer/api"
 	"github.com/gookit/redis-viewer/app"
+	"github.com/gookit/respond"
+	"github.com/gookit/sux"
 )
 
 func main() {
-	// r := gin.New()
-	r := gin.Default()
+	app.Boot()
 
-	// t, err := loadTemplate()
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// r.SetHTMLTemplate(t)
+	r := sux.New()
+	sux.Debug(true)
 
-	app.AddRoutes(r)
+	addRoutes(r)
+	r.Listen(":18080")
+}
 
-	r.Run(":18080")
+func addRoutes(r *sux.Router) {
+	assets := packr.NewBox("./static")
+	r.StaticFS("/static", assets)
+
+	tpls := packr.NewBox("./templates")
+
+	r.GET("/test", api.Home)
+	r.GET("/conf", api.Config)
+	r.GET("/servers", api.Servers)
+
+	r.Controller("/servers", &api.ServerAPI{})
+
+	r.GET("/", func(c *sux.Context) {
+		respond.HTMLString(c.Resp, 200, tpls.String("index.html"), sux.M{
+			"name": "inhere",
+		})
+	})
 }
