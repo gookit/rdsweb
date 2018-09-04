@@ -6,15 +6,15 @@ import (
 )
 
 var (
-	names []string
+	Names []string
 	nameMap = make(map[string]bool, 0)
 	pools map[string]*redis.Pool
 )
 
 func loadServerNames() {
-	names, _ = Cfg.Strings("servers", ",")
+	Names, _ = Cfg.Strings("servers", ",")
 
-	for _, name := range names {
+	for _, name := range Names {
 		nameMap[name] = true
 	}
 }

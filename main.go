@@ -22,16 +22,14 @@ func addRoutes(r *sux.Router) {
 	assets := packr.NewBox("./static")
 	r.StaticFS("/static", assets)
 
-	tpls := packr.NewBox("./templates")
-
 	r.GET("/test", api.Home)
 	r.GET("/conf", api.Config)
-	r.GET("/servers", api.Servers)
 
+	r.Controller("/redis", &api.RedisAPI{})
 	r.Controller("/servers", &api.ServerAPI{})
 
 	r.GET("/", func(c *sux.Context) {
-		respond.HTMLString(c.Resp, 200, tpls.String("index.html"), sux.M{
+		respond.HTMLString(c.Resp, 200, app.Res.String("templates/index.html"), sux.M{
 			"name": "inhere",
 		})
 	})
