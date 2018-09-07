@@ -42,7 +42,7 @@ func Boot() {
 }
 
 func loadLanguages() {
-	defI18n := i18n.Instance()
+	defI18n := i18n.Default()
 	defI18n.DefaultLang = "en"
 	defI18n.NewLang("en",    "English")
 	defI18n.NewLang("zh-CN", "简体中文")
