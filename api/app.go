@@ -6,10 +6,10 @@ import (
 	"github.com/gookit/sux"
 )
 
-func Home(c *sux.Context) {
-	respond.JSON(c.Resp, 200, sux.M{"hello": "welcome"})
+func Home(c *rux.Context) {
+	respond.JSON(c.Resp, 200, rux.M{"hello": "welcome"})
 }
 
-func Config(c *sux.Context) {
+func Config(c *rux.Context) {
 	respond.JSON(c.Resp, 200, app.Cfg.Data())
 }

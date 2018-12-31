@@ -16,7 +16,7 @@ type ServerAPI struct {
 }
 
 // AddRoutes for the controller
-func (a *ServerAPI) AddRoutes(g *sux.Router) {
+func (a *ServerAPI) AddRoutes(g *rux.Router) {
 	g.GET("", a.Index)
 	g.GET("/names", a.Names)
 	g.GET(RdsName, a.Get)
@@ -26,7 +26,7 @@ func (a *ServerAPI) AddRoutes(g *sux.Router) {
 }
 
 // Servers get redis server list
-func (a *ServerAPI) Index(c *sux.Context) {
+func (a *ServerAPI) Index(c *rux.Context) {
 	var servers []ini.Section
 	for _, name := range app.Names {
 		if conf, ok := app.Cfg.StringMap(name); ok {
@@ -39,14 +39,14 @@ func (a *ServerAPI) Index(c *sux.Context) {
 }
 
 // Names get redis server names from config
-func (a *ServerAPI) Names(c *sux.Context) {
+func (a *ServerAPI) Names(c *rux.Context) {
 	ss, _ := app.Cfg.Strings("servers", ",")
 
 	c.JSONBytes(200, app.JSON(ss))
 }
 
 // Get a redis server config by name
-func (a *ServerAPI) Get(c *sux.Context) {
+func (a *ServerAPI) Get(c *rux.Context) {
 	name := c.Param("name")
 
 	if conf, ok := app.Cfg.StringMap(name); ok {
@@ -58,19 +58,19 @@ func (a *ServerAPI) Get(c *sux.Context) {
 }
 
 // Create new redis server config
-func (a *ServerAPI) Create(c *sux.Context) {
+func (a *ServerAPI) Create(c *rux.Context) {
 
 }
 
 // Update a redis server config
-func (a *ServerAPI) Update(c *sux.Context) {
+func (a *ServerAPI) Update(c *rux.Context) {
 
 }
 
 // Delete a redis server config
-func (a *ServerAPI) Delete(c *sux.Context) {
+func (a *ServerAPI) Delete(c *rux.Context) {
 	name, ok := c.QueryParam("name")
-	if !ok || name == ""{
+	if !ok || name == "" {
 		bs := app.ErrJSON(2, "invalid request params")
 		c.JSONBytes(200, bs)
 		return

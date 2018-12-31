@@ -4,7 +4,7 @@ package app
 func MakeJSON(code int, msg string, v interface{}) []byte {
 	bs, _ := json.Marshal(map[string]interface{}{
 		"code": code,
-		"msg": msg,
+		"msg":  msg,
 		"data": v,
 	})
 

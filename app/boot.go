@@ -11,8 +11,8 @@ import (
 
 var (
 	json = jsoniter.ConfigCompatibleWithStandardLibrary
-	Cfg *ini.Ini
-	Res packr.Box
+	Cfg  *ini.Ini
+	Res  packr.Box
 )
 
 // Boot app components
@@ -44,7 +44,7 @@ func Boot() {
 func loadLanguages() {
 	defI18n := i18n.Default()
 	defI18n.DefaultLang = "en"
-	defI18n.NewLang("en",    "English")
+	defI18n.NewLang("en", "English")
 	defI18n.NewLang("zh-CN", "简体中文")
 
 	// load data

@@ -6,9 +6,9 @@ import (
 )
 
 var (
-	Names []string
+	Names   []string
 	nameMap = make(map[string]bool, 0)
-	pools map[string]*redis.Pool
+	pools   map[string]*redis.Pool
 )
 
 func loadServerNames() {

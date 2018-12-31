@@ -11,14 +11,14 @@ import (
 func main() {
 	app.Boot()
 
-	r := sux.New()
-	sux.Debug(true)
+	r := rux.New()
+	rux.Debug(true)
 
 	addRoutes(r)
 	r.Listen(":18080")
 }
 
-func addRoutes(r *sux.Router) {
+func addRoutes(r *rux.Router) {
 	assets := packr.NewBox("./static")
 	r.StaticFS("/static", assets)
 
@@ -28,8 +28,8 @@ func addRoutes(r *sux.Router) {
 	r.Controller("/redis", &api.RedisAPI{})
 	r.Controller("/servers", &api.ServerAPI{})
 
-	r.GET("/", func(c *sux.Context) {
-		respond.HTMLString(c.Resp, 200, app.Res.String("templates/index.html"), sux.M{
+	r.GET("/", func(c *rux.Context) {
+		respond.HTMLString(c.Resp, 200, app.Res.String("templates/index.html"), rux.M{
 			"name": "inhere",
 		})
 	})

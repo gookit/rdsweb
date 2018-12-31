@@ -10,7 +10,7 @@ type RedisAPI struct {
 }
 
 // AddRoutes for the controller
-func (a *RedisAPI) AddRoutes(g *sux.Router) {
+func (a *RedisAPI) AddRoutes(g *rux.Router) {
 	g.GET(RdsName+"/open", a.Open)
 	g.GET(RdsName+"/info", a.Info)
 	g.GET(RdsName+"/stats", a.Stats)
@@ -20,31 +20,31 @@ func (a *RedisAPI) AddRoutes(g *sux.Router) {
 }
 
 // Open
-func (a *RedisAPI) Open(c *sux.Context) {
+func (a *RedisAPI) Open(c *rux.Context) {
 
 }
 
 // Info
-func (a *RedisAPI) Info(c *sux.Context) {
+func (a *RedisAPI) Info(c *rux.Context) {
 
 }
 
 // Stats
-func (a *RedisAPI) Stats(c *sux.Context) {
+func (a *RedisAPI) Stats(c *rux.Context) {
 
 }
 
 // ListDB
-func (a *RedisAPI) ListDB(c *sux.Context) {
+func (a *RedisAPI) ListDB(c *rux.Context) {
 
 }
 
 // ListKeys
-func (a *RedisAPI) ListKeys(c *sux.Context) {
+func (a *RedisAPI) ListKeys(c *rux.Context) {
 
 }
 
 // SearchKey
-func (a *RedisAPI) SearchKey(c *sux.Context) {
+func (a *RedisAPI) SearchKey(c *rux.Context) {
 
 }
