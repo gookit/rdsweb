@@ -2,8 +2,8 @@ package api
 
 import (
 	"github.com/gookit/ini"
-	"github.com/gookit/redis-viewer/app"
-	"github.com/gookit/sux"
+	"github.com/gookit/rdsweb/app"
+	"github.com/gookit/rux"
 )
 
 // BaseAPI controller
@@ -29,7 +29,8 @@ func (a *ServerAPI) AddRoutes(g *rux.Router) {
 func (a *ServerAPI) Index(c *rux.Context) {
 	var servers []ini.Section
 	for _, name := range app.Names {
-		if conf, ok := app.Cfg.StringMap(name); ok {
+		conf := ini.StringMap(name)
+		if len(conf) > 0 {
 			conf["name"] = name
 			servers = append(servers, conf)
 		}
@@ -40,7 +41,7 @@ func (a *ServerAPI) Index(c *rux.Context) {
 
 // Names get redis server names from config
 func (a *ServerAPI) Names(c *rux.Context) {
-	ss, _ := app.Cfg.Strings("servers", ",")
+	ss := ini.Strings("servers", ",")
 
 	c.JSONBytes(200, app.JSON(ss))
 }
@@ -48,8 +49,9 @@ func (a *ServerAPI) Names(c *rux.Context) {
 // Get a redis server config by name
 func (a *ServerAPI) Get(c *rux.Context) {
 	name := c.Param("name")
+	conf := ini.StringMap(name)
 
-	if conf, ok := app.Cfg.StringMap(name); ok {
+	if len(conf) > 0 {
 		conf["name"] = name
 		c.JSONBytes(200, app.JSON(conf))
 	} else {
@@ -76,6 +78,6 @@ func (a *ServerAPI) Delete(c *rux.Context) {
 		return
 	}
 
-	app.Cfg.DelSection(name)
+	ini.Default().DelSection(name)
 	c.JSONBytes(200, app.JSON(nil))
 }

@@ -2,6 +2,8 @@ package app
 
 import (
 	"github.com/garyburd/redigo/redis"
+	"github.com/gookit/ini"
+
 	"time"
 )
 
@@ -12,8 +14,7 @@ var (
 )
 
 func loadServerNames() {
-	Names, _ = Cfg.Strings("servers", ",")
-
+	Names = ini.Strings("servers", ",")
 	for _, name := range Names {
 		nameMap[name] = true
 	}
@@ -35,7 +36,7 @@ func Rds(name string) *redis.Pool {
 		return nil
 	}
 
-	if conf, ok := Cfg.StringMap(name); ok {
+	if conf := ini.StringMap(name); len(conf) > 0 {
 		pl := newPool(conf["url"], conf["pwd"], 0)
 		pools[name] = pl
 

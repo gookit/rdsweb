@@ -1,6 +1,6 @@
 package api
 
-import "github.com/gookit/sux"
+import "github.com/gookit/rux"
 
 const RdsName = `/{name:[\w-]+}`
 

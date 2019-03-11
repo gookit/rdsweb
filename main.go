@@ -2,10 +2,10 @@ package main
 
 import (
 	"github.com/gobuffalo/packr"
-	"github.com/gookit/redis-viewer/api"
-	"github.com/gookit/redis-viewer/app"
+	"github.com/gookit/rdsweb/api"
+	"github.com/gookit/rdsweb/app"
 	"github.com/gookit/respond"
-	"github.com/gookit/sux"
+	"github.com/gookit/rux"
 )
 
 func main() {

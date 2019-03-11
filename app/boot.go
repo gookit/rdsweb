@@ -1,7 +1,9 @@
 package app
 
 import (
+	"flag"
 	"fmt"
+
 	"github.com/gobuffalo/packr"
 	"github.com/gookit/i18n"
 	"github.com/gookit/ini"
@@ -11,16 +13,25 @@ import (
 
 var (
 	json = jsoniter.ConfigCompatibleWithStandardLibrary
-	Cfg  *ini.Ini
 	Res  packr.Box
 )
 
+var (
+	config string
+)
+
+func readCliConfig() {
+	config = *flag.String("c", "config/config.ini", "set config file")
+}
+
 // Boot app components
 func Boot() {
-	var err error
+
+	// TODO read command line options
+	// readCliConfig()
 
 	// init config
-	Cfg, err = ini.LoadFiles("conf/config.ini")
+	err := ini.LoadFiles("config/config.ini")
 	if err != nil {
 		panic(err)
 	}
@@ -37,7 +48,6 @@ func Boot() {
 	})
 
 	loadServerNames()
-
 	loadLanguages()
 }
 
@@ -48,8 +58,11 @@ func loadLanguages() {
 	defI18n.NewLang("zh-CN", "简体中文")
 
 	// load data
-	for lang, _ := range defI18n.Languages() {
+	for lang := range defI18n.Languages() {
 		str := Res.String(fmt.Sprintf("languages/%s.ini", lang))
-		defI18n.Lang(lang).LoadStrings(str)
+		err := defI18n.Lang(lang).LoadStrings(str)
+		if err != nil {
+			panic(err)
+		}
 	}
 }

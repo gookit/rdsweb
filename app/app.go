@@ -7,7 +7,6 @@ func MakeJSON(code int, msg string, v interface{}) []byte {
 		"msg":  msg,
 		"data": v,
 	})
-
 	return bs
 }
 
