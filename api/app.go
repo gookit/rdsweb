@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/gookit/ini"
+	"github.com/gookit/ini/v2"
 	"github.com/gookit/respond"
 	"github.com/gookit/rux"
 )

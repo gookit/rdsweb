@@ -6,7 +6,7 @@ import (
 
 	"github.com/gobuffalo/packr"
 	"github.com/gookit/i18n"
-	"github.com/gookit/ini"
+	"github.com/gookit/ini/v2"
 	"github.com/gookit/respond"
 	"github.com/json-iterator/go"
 )

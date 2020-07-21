@@ -2,7 +2,7 @@ package app
 
 import (
 	"github.com/garyburd/redigo/redis"
-	"github.com/gookit/ini"
+	"github.com/gookit/ini/v2"
 
 	"time"
 )

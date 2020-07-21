@@ -29,7 +29,13 @@ func addRoutes(r *rux.Router) {
 	r.Controller("/servers", &api.ServerAPI{})
 
 	r.GET("/", func(c *rux.Context) {
-		respond.HTMLString(c.Resp, 200, app.Res.String("templates/index.html"), rux.M{
+		str, err := app.Res.FindString("templates/index.html")
+		if err != nil {
+			c.AddError(err)
+			return
+		}
+
+		respond.HTMLString(c.Resp, 200, str, rux.M{
 			"name": "inhere",
 		})
 	})
